@@ -6,7 +6,7 @@
 	
 	local version	13		// Set Stata version
 	local packages	0		// 1 to install required packages -- only needs to run 1 in each machine
-	local clean		1 		// 1 to create clean data sets
+	local clean		0 		// 1 to create clean data sets
 	local construct	1 		// 1 to create final data sets
 	local analysis	1		// 1 to print the numbers in the presentation
 		
@@ -78,19 +78,7 @@
 ------------------------------------------------------------------------------*/
 	
 		do "${do}/Cleaning.do"
-	
-/*------------------------------------------------------------------------------
-									RA data
---------------------------------------------------------------------------------
-
-	 REQUIRES:	"${data_int}/Replicable research - Merged data set"
-																			
-	 CREATES:	"${data_fin}/Replicable research - Aggregated RA data set"
-					
-------------------------------------------------------------------------------*/
-
-		do "${do}/Construct/Construct RA data set.do"
-	}
+}
 	
 	
 /*******************************************************************************
@@ -110,7 +98,18 @@
 ------------------------------------------------------------------------------*/
 
 		do "${do}/Construct/Construct PI data set.do"
-	
+		
+/*------------------------------------------------------------------------------
+									RA data
+--------------------------------------------------------------------------------
+
+	 REQUIRES:	"${data_int}/Replicable research - Merged data set"
+																			
+	 CREATES:	"${data_fin}/Replicable research - Aggregated RA data set"
+					
+------------------------------------------------------------------------------*/
+
+		do "${do}/Construct/Construct RA data set.do"	
 }
 
 	if `analysis' {
@@ -130,7 +129,7 @@
 						Descriptives of PI survey 							   
 --------------------------------------------------------------------------------
 
-	REQUIRES:	"${data_fin}/Replicable research - PI - Clean data set"
+	REQUIRES:	"${data_fin}/Replicable research - PI - Constructed data set"
 																			
 	CREATES:	"${output}/Internal code review.png"
 				"${output}/External code review.png"
@@ -146,12 +145,13 @@
 ------------------------------------------------------------------------------*/
 
 	do "${do}/Analysis/PI graphs.do"
+}
 
 /*------------------------------------------------------------------------------
 				Compare responses of DIME PIs and RAs
 --------------------------------------------------------------------------------
 	
-	REQUIRES:	"${data_fin}/Replicable research - PI - Clean data set"
+	REQUIRES:	"${data_fin}/Replicable research - Merged data set"
 				"${data_fin}/Replicable research - Aggregated RA data set"
 																			
 	CREATES:	"${output}/DIME - Benefit.png"
@@ -159,8 +159,6 @@
 				
 ------------------------------------------------------------------------------*/
 	
-	do "${do}/Analysis/DIME graphs.do"
-
-}
+	if `DIME' do "${do}/Analysis/DIME graphs.do"
 
 ****************************** End of do-file **********************************

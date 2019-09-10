@@ -16,7 +16,9 @@
 
 *******************************************************************************/
 
-	use "${data_fin}/Replicable research - PI - Clean data set", clear
+	use "${data_fin}/Replicable research - Clean data set", clear
+	
+	keep if pi == 1
 	
 	
 /*******************************************************************************
