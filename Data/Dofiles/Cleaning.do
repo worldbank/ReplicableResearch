@@ -27,8 +27,27 @@
 	
 	replace pi = 1 if missing(pi)
 
+
+	* Apply labels
+	iecodebook apply using "${doc}\Merged data set - Labelling.xlsx", drop
+	
+	* Fix format of calculate field
+	destring _all, replace
+	
+	* Order
+	order key pi sample respondent
+	
 	
 	* This data set includes potentially identifiable data, so will save in an
 	* encrypted folder
 	save "${data_int}/Replicable research - Merged data set", replace
 
+
+	* Potentially identifying variables
+	drop 	sample respondent *other comments 
+	
+	* Drop RAs because they are few and come from a single institution
+	drop if pi != 1
+	
+	saveold "${data_fin}/Replicable research - PI - Clean data set", replace v(13)
+	
