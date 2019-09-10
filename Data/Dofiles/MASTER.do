@@ -9,11 +9,11 @@
 	local clean		1 		// 1 to create clean data sets
 	local construct	1 		// 1 to create final data sets
 	local analysis	1		// 1 to print the numbers in the presentation
-	
-	pause 			off 	// on to not pause when creating number for presentation
-	
+		
 	ieboilstart, v(`version')
 	`r(version)'
+	
+	pause 			off 	// on to not pause when creating number for presentation
 	
 *	global github 			"ADD/FOLDER/PATH"
 *	global encrypted 		"ADD/FOLDER/PATH"
@@ -139,6 +139,8 @@
 				"${output}/Process for improving code.png"
 				"${output}/Benefit.png"
 				"${output}/Constraints to adoption.png"
+				"${output}/PI trainings.png"
+				"${output}/RA trainings.png"
 
 ------------------------------------------------------------------------------*/
 

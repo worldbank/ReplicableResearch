@@ -16,6 +16,8 @@
 					"${output}/Process for improving code.png"
 					"${output}/Benefit.png"
 					"${output}/Constraints to adoption.png"
+					"${output}/PI trainings.png"
+					"${output}/RA trainings.png"
 	
 	** IDS VAR: 	key
 	
@@ -97,7 +99,7 @@
 						
 	* SLIDE 12: What tools could the team benefit from
 	lab def tranings_more	1 "Version control software" ///
-							2 "Data managements tools (folders, master scripts)" ///
+							2 "Data managements tools" ///
 							3 "Code automation" ///
 							4 "Coding practices	" ///
 							5 "Internal code review" ///
@@ -115,9 +117,20 @@
 							7 "Cost benefit is low"
 	local constraintstitle Constraints to adoption
 	
+	* SLIDE 14: Trainings attended
+	label def 	trainings 	1 "Version control software" ///
+							2 "Data managements tools" ///
+							3 "Code automation" ///
+							4 "Coding practices	" ///
+							0 "None of the above"
+							
+	local 		trainingstitle		PI trainings
+	label copy 	trainings	 		trainings_ra
+	lab   def	trainings_ra		5 "Does not know", add
+	local 		trainings_ratitle	RA trainings
 	
 	* Create graphs
-	foreach method in tasks versions abstraction tranings_more  constraints {
+	foreach method in tasks versions abstraction tranings_more constraints trainings trainings_ra {
 	
 		preserve
 		
