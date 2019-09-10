@@ -6,18 +6,17 @@
 	
 	local version	13		// Set Stata version
 	local packages	0		// 1 to install required packages -- only needs to run 1 in each machine
-	local clean		0 		// 1 to create clean data sets
-	local construct	0 		// 1 to create final data sets
-	local numbers	0		// 1 to print the numbers in the presentation
-	local graphs	1		// 1 to create final outputs
+	local clean		1 		// 1 to create clean data sets
+	local construct	1 		// 1 to create final data sets
+	local analysis	1		// 1 to print the numbers in the presentation
 	
 	pause 			off 	// on to not pause when creating number for presentation
 	
 	ieboilstart, v(`version')
 	`r(version)'
 	
-	global github 			"ADD/FOLDER/PATH"
-	global encrypted 		"ADD/FOLDER/PATH"
+*	global github 			"ADD/FOLDER/PATH"
+*	global encrypted 		"ADD/FOLDER/PATH"
 
 /*******************************************************************************
 								Set directories
@@ -36,14 +35,15 @@
 							   Set globals
 *******************************************************************************/	
 
-	/* Graph formatting
+	* Graph formatting
 	global bar_graph		blabel(total, format(%9.0f)) ///
 							graphregion(color(white)) ///
 							yscale(off) ///
 							ylab(, nogrid) ///
-							bar(1, color("91 155 213"))
+							bar(1, color("91 155 213")) ///
+							bar(2, color("237 125 49"))
 	
-	*/
+	
 /*******************************************************************************
 							   Install packages
 *******************************************************************************/	
@@ -78,47 +78,86 @@
 	
 	if `clean' 		do "${do}/Cleaning.do"
 	
-/******************************************************************************
-					Create indicators for descriptives statistics
---------------------------------------------------------------------------------
 	
+	
+/*******************************************************************************
+					Create indicators for descriptives statistics
+*******************************************************************************/
+
+	if `construct' {
+		
+/*------------------------------------------------------------------------------
+									PI data
+--------------------------------------------------------------------------------
+
 	 REQUIRES:	"${data_fin}/Replicable research - PI - Clean data set"
 																			
 	 CREATES:	"${data_fin}/Replicable research - PI - Constructed data set"
 					
-*******************************************************************************/
+------------------------------------------------------------------------------*/
 
-	if `construct'	do "${do}/Construct/Construct PI data set.do"
+		do "${do}/Construct/Construct PI data set.do"
+	
+/*------------------------------------------------------------------------------
+									RA data
+--------------------------------------------------------------------------------
 
-/*******************************************************************************
+	 REQUIRES:	"${data_int}/Replicable research - Merged data set"
+																			
+	 CREATES:	"${data_fin}/Replicable research - Aggregated RA data set"
+					
+------------------------------------------------------------------------------*/
+
+	do "${do}/Construct/Construct RA data set.do"
+
+}
+
+	if `analysis' {
+	
+/*------------------------------------------------------------------------------
 						Recreate numbers in slides
 --------------------------------------------------------------------------------
 	
 	 REQUIRES:	"${data_fin}/Replicable research - PI - Constructed data set"
-																			
-	 CREATES:	
-					
-*******************************************************************************/
+		
+------------------------------------------------------------------------------*/
 
-	if `numbers'	do "${do}/Analysis/Numbers for slides.do"
-	
-/*******************************************************************************
+		do "${do}/Analysis/Numbers for slides.do"
+
+
+/*------------------------------------------------------------------------------
 						Descriptives of PI survey 							   
 --------------------------------------------------------------------------------
 
-	** REQUIRES:	"${data_fin}/Replicable research - PI - Clean data set"
+	REQUIRES:	"${data_fin}/Replicable research - PI - Clean data set"
 																			
-	** CREATES:	  	"${output}/Internal code review.png"
-					"${output}/External code review.png"
-					"${output}/Directories structure.png"
-					"${output}/Version control.png"
-					"${output}/Task management tool.png"
-					"${output}/Process for improving code.png"
-					"${output}/Benefit.png"
-					"${output}/Constraints to adoption.png"
+	CREATES:	"${output}/Internal code review.png"
+				"${output}/External code review.png"
+				"${output}/Directories structure.png"
+				"${output}/Version control.png"
+				"${output}/Task management tool.png"
+				"${output}/Process for improving code.png"
+				"${output}/Benefit.png"
+				"${output}/Constraints to adoption.png"
 
-*******************************************************************************/
+------------------------------------------------------------------------------*/
+
+	do "${do}/Analysis/PI graphs.do"
+
+/*------------------------------------------------------------------------------
+				Compare responses of DIME PIs and RAs
+--------------------------------------------------------------------------------
 	
-	if `graphs'	do "${do}/Analysis/PI graphs.do"
+	REQUIRES:	"${data_fin}/Replicable research - PI - Clean data set"
+				"${data_fin}/Replicable research - Aggregated RA data set"
+																			
+	CREATES:	"${output}/DIME - Benefit.png"
+				"${output}/DIME - Constraints.png"
+				
+------------------------------------------------------------------------------*/
 	
+	do "${do}/Analysis/DIME graphs.do"
+
+}
+
 ****************************** End of do-file **********************************
