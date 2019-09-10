@@ -15,8 +15,8 @@
 	
 	pause 			off 	// on to not pause when creating number for presentation
 	
-*	global github 			"ADD/FOLDER/PATH"
-*	global encrypted 		"ADD/FOLDER/PATH"
+	global github 			"ADD/FOLDER/PATH"
+	global encrypted 		"ADD/FOLDER/PATH"
 
 /*******************************************************************************
 								Set directories
@@ -61,7 +61,8 @@
 							    Run do-files
 *******************************************************************************/
 	
-/*******************************************************************************
+	if `clean' {
+/*------------------------------------------------------------------------------
 							Clean raw data
 --------------------------------------------------------------------------------
 	
@@ -74,10 +75,22 @@
 	 CREATES:	"${data_int}/Replicable research - Merged data set"
 				"${data_fin}/Replicable research - PI - Clean data set"
 					
-*******************************************************************************/
+------------------------------------------------------------------------------*/
 	
-	if `clean' 		do "${do}/Cleaning.do"
+		do "${do}/Cleaning.do"
 	
+/*------------------------------------------------------------------------------
+									RA data
+--------------------------------------------------------------------------------
+
+	 REQUIRES:	"${data_int}/Replicable research - Merged data set"
+																			
+	 CREATES:	"${data_fin}/Replicable research - Aggregated RA data set"
+					
+------------------------------------------------------------------------------*/
+
+		do "${do}/Construct/Construct RA data set.do"
+	}
 	
 	
 /*******************************************************************************
@@ -98,18 +111,6 @@
 
 		do "${do}/Construct/Construct PI data set.do"
 	
-/*------------------------------------------------------------------------------
-									RA data
---------------------------------------------------------------------------------
-
-	 REQUIRES:	"${data_int}/Replicable research - Merged data set"
-																			
-	 CREATES:	"${data_fin}/Replicable research - Aggregated RA data set"
-					
-------------------------------------------------------------------------------*/
-
-	do "${do}/Construct/Construct RA data set.do"
-
 }
 
 	if `analysis' {
