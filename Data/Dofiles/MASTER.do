@@ -61,4 +61,17 @@
 					
 *******************************************************************************/
 	
-	if `clean' do "${do}/1. Cleaning.do"
+	if `clean' 		do "${do}/Cleaning.do"
+	
+/******************************************************************************
+					Create indicators for descriptives statistics
+--------------------------------------------------------------------------------
+	
+	 REQUIRES:	"${data_fin}/Replicable research - PI - Clean data set"
+																			
+	 CREATES:	"${data_fin}/Replicable research - PI - Constructed data set"
+					
+*******************************************************************************/
+
+	if `construct'	do "${do}/Construct/Construct PI data set.do"
+
