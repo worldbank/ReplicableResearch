@@ -7,7 +7,8 @@
 	local version	13		// Set Stata version
 	local packages	0		// 1 to install required packages -- only needs to run 1 in each machine
 	local clean		0 		// 1 to create clean data sets
-	local construct	0 		// 1 to create final data sets
+	local construct	1 		// 1 to create final data sets
+	local numbers	1		// 1 to print the numbers in the presentation
 	local analysis	0		// 1 to create final outputs
 	
 	pause 			off 	// on to not pause when creating number for presentation
@@ -75,3 +76,16 @@
 
 	if `construct'	do "${do}/Construct/Construct PI data set.do"
 
+/*******************************************************************************
+						Recreate numbers in slides
+--------------------------------------------------------------------------------
+	
+	 REQUIRES:	"${data_fin}/Replicable research - PI - Constructed data set"
+																			
+	 CREATES:	
+					
+*******************************************************************************/
+
+	if `numbers'	do "${do}/Analysis/Numbers for slides.do"
+	
+****************************** End of do-file **********************************
