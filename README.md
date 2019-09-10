@@ -20,6 +20,6 @@ Code and data to replicate the results presented can be found in the [`Data`](ht
 
 To run it, use the [`MASTER`](https://github.com/worldbank/ReplicableResearch/blob/master/Data/Dofiles/MASTER.do) do-file, by changing only folder paths on top of the do-file, and selecting sections to run. The [`Cleaning`](https://github.com/worldbank/ReplicableResearch/blob/master/Data/Dofiles/Cleaning.do) and [`Construct RA data set`](https://github.com/worldbank/ReplicableResearch/blob/master/Data/Dofiles/Construct/Construct%20RA%20data%20set.do) do-files will only run for people who have access to the encrypted data, containing identified information
 
-# Contribution
+# Contributing
 
 For questions, requests and suggestions, please create an [`Issue`](https://github.com/worldbank/ReplicableResearch/issues) in this repository.
