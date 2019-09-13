@@ -18,7 +18,7 @@ The questionnaires used during this survey are available in the [`Questionnaires
 
 Code and data to replicate the results presented can be found in the [`Data`](https://github.com/worldbank/ReplicableResearch/tree/master/Data) folder. The code runs in Stata, and should be compatible with Stata versions 13 and up (but it was only tested in StataMP 15).
 
-To run it, use the [`MASTER`](https://github.com/worldbank/ReplicableResearch/blob/master/Data/Dofiles/MASTER.do) do-file, by changing only folder paths on top of the do-file, and selecting sections to run. The [`Cleaning`](https://github.com/worldbank/ReplicableResearch/blob/master/Data/Dofiles/Cleaning.do) and [`Construct RA data set`](https://github.com/worldbank/ReplicableResearch/blob/master/Data/Dofiles/Construct/Construct%20RA%20data%20set.do) do-files will only run for people who have access to the encrypted data, containing identified information
+To run it, use the [`MASTER`](https://github.com/worldbank/ReplicableResearch/blob/master/Data/Dofiles/MASTER.do) do-file, by changing only folder paths on top of the do-file, and selecting sections to run. The [`Cleaning`](https://github.com/worldbank/ReplicableResearch/blob/master/Data/Dofiles/Cleaning.do) and [`Construct RA data set`](https://github.com/worldbank/ReplicableResearch/blob/master/Data/Dofiles/Construct/Construct%20RA%20data%20set.do) do-files will not run on to the identified data set, which is not publicly available.
 
 # Contributing
 
