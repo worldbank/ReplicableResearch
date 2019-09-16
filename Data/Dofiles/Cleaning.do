@@ -79,12 +79,5 @@
 	PART 4: Save de-identified PI data set
 *******************************************************************************/
 
-	* Potentially identifying variables
-	drop 	sample respondent *other comments 
-	
-	* Drop RAs because they are few and come from a single institution
-	drop if pi != 1
-	
-	saveold "${data_fin}/Replicable research - PI - Clean data set", replace v(13)
 	
 ****************************** End of do-file *********************************

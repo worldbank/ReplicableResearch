@@ -26,6 +26,13 @@
 
 	tab involvement, gen(involvement_)
 	
+	egen versions = anymatch(versions_*), v(1)
+	gen abstraction = 1- abstraction_0
+	gen pi_training = 1 - trainings_0
+	gen pi_training_school = 1 - trainings_school_0
+	gen benefit = 1 - tranings_more_0
+	gen ra_training = 1 - trainings_ra_0
+	
 	
 /*******************************************************************************
 	Save constructed data set
