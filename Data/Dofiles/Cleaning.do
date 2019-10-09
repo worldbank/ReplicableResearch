@@ -80,11 +80,12 @@
 *******************************************************************************/
 
 	* Potentially identifying variables
-	drop 	sample respondent *other comments 
+	drop 	sample respondent *other comments respondent 
 	
-	* Drop RAs because they are few and come from a single institution
-	drop if pi != 1
+	foreach var of varlist years coauthors ras_all ras_pp projects {
+		replace `var' = . if pi == 0
+	}
 	
-	saveold "${data_fin}/Replicable research - PI - Clean data set", replace v(13)
+	saveold "${data_fin}/Replicable research - Clean data set", replace v(13)
 	
 ****************************** End of do-file *********************************

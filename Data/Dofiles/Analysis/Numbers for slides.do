@@ -19,14 +19,13 @@
 	** WRITEN BY:   Luiza Cardoso de Andrade - @luizaandrade	
 
 *******************************************************************************/	
-	
-	use "${data_fin}/Replicable research - PI - Constructed data set", clear
-	
 		
 /*******************************************************************************
 	SLIDE 5: PI profile
 *******************************************************************************/
 
+	use "${data_fin}/Replicable research - PI - Constructed data set", clear
+	
 	preserve
 	
 		collapse (mean) 	years coauthors ras_all ras_pp projects prepared ///

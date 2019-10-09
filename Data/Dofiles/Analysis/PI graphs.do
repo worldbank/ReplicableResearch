@@ -25,7 +25,7 @@
 
 *******************************************************************************/	
 	
-	use "${data_fin}/Replicable research - PI - Clean data set", clear
+	use "${data_fin}/Replicable research - PI - Constructed data set", clear
 	
 /*******************************************************************************
 	Select one variables: just sum the percentage of PIs
