@@ -8,15 +8,15 @@
 	local packages	0		// 1 to install required packages -- only needs to run 1 in each machine
 	local clean		1 		// 1 to create clean data sets
 	local construct	1 		// 1 to create final data sets
-	local analysis	1		// 1 to print the numbers in the presentation
+	local analysis	0		// 1 to print the numbers in the presentation
 		
 	ieboilstart, v(`version')
 	`r(version)'
 	
 	pause 			off 	// on to not pause when creating number for presentation
 	
-	global github 			"ADD/FOLDER/PATH"
-	global encrypted 		"ADD/FOLDER/PATH"
+	global github 			"C:\Users\wb501238\Documents\GitHub\ReplicableResearch"
+	global encrypted 		"C:\Users\wb501238\Dropbox\WB\Transparency\Data\DataSets"
 
 /*******************************************************************************
 								Set directories
@@ -78,6 +78,7 @@
 ------------------------------------------------------------------------------*/
 	
 		do "${do}/Cleaning.do"
+		do "${do}/Corrections.do"
 	
 /*------------------------------------------------------------------------------
 									RA data

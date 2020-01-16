@@ -32,7 +32,6 @@
 	
 	drop tasks_other
 	replace tasks_0 = 0 if tasks_5 == 1 | tasks_6 == 1
-	egen tasks = anymatch(tasks_*), v(1)
 	replace tasks_p_other_c = 0 if tasks_0 == 0 & tasks_5 == 0 & tasks_6 == 0
 	
 	lab def protocols 0 "There are none", modify
@@ -68,14 +67,14 @@
 	replace code_review_ext_phase_4 = 1 if code_review_ext_phase_0 == 1
 	drop code_review_ext_phase_0 code_review_ext_phase_other
 	
-	gen constraints_8 = inlist(constraints_other, ///
+	replace constraints_6 =1 if inlist(constraints_other, ///
 							"PIs tend to not prioritize time to data quality. It is always on their agenda but has the lowest priority and never reaches the top of the pile.", ///
 							"No internal or external staff resources for code review", ///
 							"Project funding from donors is not sufficient to support training for me and my RAs") | ///
 					  regex(comments, "ressources") | ///
 					  regex(comments, "99.9")
 							
-	gen constraints_9 = inlist(constraints_other, ///
+	gen constraints_8 = inlist(constraints_other, ///
 								"Psychological resistance from RAs and other CI", ///
 								"Coordination issues with other PIs" , ///
 								"Want solutions that work well offline when travelling; coordination issues among many co-authors makes take-up of any new program difficult since you need everyone to buy in.") | ///

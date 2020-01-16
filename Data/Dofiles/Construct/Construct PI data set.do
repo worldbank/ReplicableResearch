@@ -16,7 +16,7 @@
 
 *******************************************************************************/
 
-	use "${data_fin}/Replicable research - PI - Clean data set", clear
+	use "${data_fin}/Replicable research - Clean data set", clear
 	
 	
 /*******************************************************************************
@@ -24,14 +24,17 @@
 	(so it's easier to calculate descriptive stats)
 *******************************************************************************/
 
+	keep if pi == 1 
 	tab involvement, gen(involvement_)
 	
 	egen versions = anymatch(versions_*), v(1)
-	gen abstraction = 1- abstraction_0
+	egen abstraction = anymatch(abstraction_1 abstraction_2), v(1)
 	gen pi_training = 1 - trainings_0
 	gen pi_training_school = 1 - trainings_school_0
 	gen benefit = 1 - tranings_more_0
 	gen ra_training = 1 - trainings_ra_0
+	egen tasks = anymatch(tasks_2 tasks_3 tasks_4 tasks_0 tasks_5 tasks_6), v(1)
+	egen constraints = anymatch(constraints_*), v(1)
 	
 	
 /*******************************************************************************

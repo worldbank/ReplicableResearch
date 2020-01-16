@@ -74,10 +74,5 @@
 	* This data set includes potentially identifiable data, so will save in an
 	* encrypted folder
 	save "${data_int}/Replicable research - Merged data set", replace
-
-/*******************************************************************************
-	PART 4: Save de-identified PI data set
-*******************************************************************************/
-
 	
 ****************************** End of do-file *********************************
